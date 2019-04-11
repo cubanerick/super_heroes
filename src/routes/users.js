@@ -1,11 +1,10 @@
 const express = require('express');
 const usersOriginal = require('../data/users');
 const { check, validationResult } = require('express-validator/check');
+const router = express.Router();
 
 let usersCopy = [ ...usersOriginal ];
 let userCount = usersCopy.length;
-
-const router = express.Router();
 
 // Reduce duplicates by property in hero array
 Reduce = (Arr, prop) => {
@@ -19,7 +18,7 @@ Reduce = (Arr, prop) => {
   // Map new objects from updated hero list
   const newArr = heroList.map((item, index, arr) => {
     let obj = {
-      id: '',
+      id: 0,
       first_name: '',
       last_name: '',
       hero_name: item,
@@ -31,10 +30,8 @@ Reduce = (Arr, prop) => {
         obj.last_name = Arr[i].last_name;
         obj.id = Arr[i].id;
         if(Arr[i].favorite_food !== '') {
-          obj.favorite_food.push({id: Arr[i].id , food: Arr[i].favorite_food})
-        } else {
-          obj.favorite_food.splice()
-        };
+          obj.favorite_food.push({Hid: Arr[i].id , food: Arr[i].favorite_food})
+        }
       }
     }
     return obj
@@ -42,28 +39,9 @@ Reduce = (Arr, prop) => {
  return newArr;
 }
 
-router.delete('/food', [
-  check('id').exists()
-], (req, res) => {
-  try {
-    validationResult(req).throw();
-    for(let i = 0; i < usersCopy.length; i++) {
-      if(usersCopy[i].id === JSON.parse(req.query.id)) {
-        usersCopy.splice(i, 1);
-      }
-    }
-    res.send({
-      success: true
-    })
-  } catch(err) {
-    res.status(422).send(err.toString());
-  }
-});
-
 router.get('/foods', (req, res) => {
-  // Remove Duplicates and sort
-  const reduced = Reduce(usersCopy.sort((a, b) => a.id - b.id), 'hero_name').sort((a, b) => b.id - a.id)
-  res.send(reduced);
+  let reduced = Reduce(usersCopy.sort((a, b) => a.id - b.id), 'hero_name').sort((a, b) => b.id - a.id)
+  res.send(reduced)
 });
 
 router.post('/food', [
@@ -82,6 +60,24 @@ router.post('/food', [
       success: userCount
     })
   } catch (err) {
+    res.status(422).send(err.toString());
+  }
+});
+
+router.delete('/food', [
+  check('id').exists()
+], (req, res) => {
+  try {
+    // validationResult(req).throw();
+    for(let i = 0; i < usersCopy.length; i++) {
+      if(usersCopy[i].id === JSON.parse(req.query.id)) {
+        usersCopy.splice(i, 1);
+      }
+    }
+    res.send({
+      success: true
+    })
+  } catch(err) {
     res.status(422).send(err.toString());
   }
 });

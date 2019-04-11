@@ -40,7 +40,7 @@ export default class Index extends React.Component {
     })
     .then(function (response) {
       console.log(response);
-      location.reload();
+      // location.reload();
     })
     .catch(function (error) {
       console.log(error);
@@ -49,7 +49,7 @@ export default class Index extends React.Component {
 
   // Loads 4 more Heroes to the list on display
   loadMore = () => {
-    // Resets all the Delete button to not display
+    // Resets all the Delete buttons to not display
     for(let i = 0; i < document.querySelectorAll('.deleteBtn').length; i++) {
       document.querySelectorAll('.deleteBtn')[i].classList.add('displayNone')
     }
@@ -84,6 +84,10 @@ export default class Index extends React.Component {
     }
   }
 
+  checkArray = (arr) => {
+    return Array.isArray(arr);
+  }
+
   render(){
     return (
         <Layout displayEdit={this.displayEdit}>
@@ -107,11 +111,12 @@ export default class Index extends React.Component {
                         <li className='Hero' key={index + `,`+ item.hero_name + `,`+ item.id}>
                             <h2>{index + 1 + `. ` + item.hero_name}</h2>
                             <h3>{item.first_name + ` ` + item.last_name}</h3>
-                            {item.favorite_food.map((item, index) => {
+                            <p>Favorite Food:</p>
+                            {this.checkArray(item.favorite_food) ? item.favorite_food.map((item2, index2) => {
                               return(
-                                <p key={index}>{index + 1 + `. `+ item.food}</p>
+                                <p key={index2}>{index2 + 1 + `. `+ item2.food}</p>
                               )
-                            })}
+                            }): <p>{item.favorite_food}</p>}
                             <button title='Delete Hero' className='deleteBtn displayNone' id={item.id} onClick={this.delete}><img className='icon' src='/static/icons8-cancel-48.png'/></button>
                         </li>
                     )
