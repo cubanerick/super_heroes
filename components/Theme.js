@@ -1,5 +1,5 @@
 const prod = {
-    getUserFoods: `https://`
+    getUserFoods: `https://super-hero-food.herokuapp.com`
 }
 
 const dev = {
@@ -7,7 +7,7 @@ const dev = {
 }
 
 const Theme = {
-    links: [dev]
+    links: [prod]
 }
 
 export default Theme
