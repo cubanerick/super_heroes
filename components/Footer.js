@@ -1,7 +1,7 @@
 const Footer = props => (
     <footer>
         <nav>
-            <p>&copy; 2019 Super Hero Foods</p>
+            <a href='https://github.com/cubanerick/super_heroes'>github</a>
         </nav>
         <style jsx>{`
             footer {
@@ -16,6 +16,9 @@ const Footer = props => (
                 height: 100px;
                 line-height: 100px;
                 float: right;
+            }
+            a {
+                color: #FCF7F8; 
             }
         `}</style>
     </footer>

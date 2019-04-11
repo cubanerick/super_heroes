@@ -62,7 +62,7 @@ router.delete('/food', [
 
 router.get('/foods', (req, res) => {
   // Remove Duplicates and sort
-  const reduced = Reduce(usersCopy.sort((a, b) => a.id - b.id), 'hero_name')
+  const reduced = Reduce(usersCopy.sort((a, b) => a.id - b.id), 'hero_name').sort((a, b) => b.id - a.id)
   res.send(reduced);
 });
 
