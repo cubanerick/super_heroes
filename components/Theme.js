@@ -1,5 +1,5 @@
 const prod = {
-    getUserFoods: `https://super-hero-food.herokuapp.com`
+    getUserFoods: `https://super-hero-food.herokuapp.com/users/foods`
 }
 
 const dev = {
