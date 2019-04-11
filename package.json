@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon ./src/index.js",
     "test": "cross-env NODE_ENV=test mocha --exit",
-    "start": "npm run dev",
+    "start": "node ./src/index.js",
     "build": "next build",
     "postinstall": "npm run build"
   },
