@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon ./src/index.js",
     "test": "cross-env NODE_ENV=test mocha --exit",
-    "start": "next start"
+    "start": "node ./src/index.js",
+    "build": "next build",
+    "postinstall": "npm run build"
   },
   "author": "",
   "license": "ISC",
