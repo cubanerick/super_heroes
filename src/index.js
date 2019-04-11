@@ -5,7 +5,7 @@ const app = next({dev})
 const bodyParser = require('body-parser');
 const handle = app.getRequestHandler()
 
-const port = process.env.NODE_ENV === 'development' ? 3001 : 3010;
+const port = process.env.PORT || 3001;
 
 let healthRoutes = require('./routes/health');
 let usersRoutes = require('./routes/users');
